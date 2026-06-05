@@ -1,0 +1,22 @@
+.timer {
+  margin-top: 10rem;
+}
+
+.text {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+}
+
+button {
+  width: 6rem;
+  padding: 0.5rem;
+  background-color: rgba(150, 170, 147, 0.541);
+  border-radius: 5px;
+  border: none;
+}
