@@ -2,14 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 function useInput() {
-  const [input, setInput] = useState(0);
+  const [input, setInput] = useState("");
 
   function inputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setInput(Number(event.target.value));
+    setInput(event.target.value);
     console.log(input);
   }
 
-  return { input, inputChange };
+  return { input, inputChange, setInput };
 }
 
 function useTimer(startTime: number) {
@@ -22,6 +22,11 @@ function useTimer(startTime: number) {
 
   function startButton() {
     if (countRef.current !== null) return;
+
+    if (leftTime <= 0) {
+      setLeftTime(startTime);
+      return;
+    }
 
     countRef.current = setInterval(() => {
       setLeftTime((time) => {
@@ -45,15 +50,21 @@ function useTimer(startTime: number) {
   function resetButton() {
     clearInterval(countRef.current);
     countRef.current = null;
-    setLeftTime(startTime);
+    setLeftTime(0);
   }
 
   return { leftTime, startButton, setLeftTime, pauseButton, resetButton };
 }
 
 function App() {
-  const { input, inputChange } = useInput();
-  const { leftTime, startButton, pauseButton, resetButton } = useTimer(input);
+  const { input, setInput, inputChange } = useInput();
+  const { leftTime, startButton, pauseButton, resetButton } =
+    useTimer(Number(input)) || 0;
+
+  function handleResetButton() {
+    resetButton();
+    setInput("");
+  }
   return (
     <div className="timer text">
       <h1 className="title text">Timer</h1>
@@ -70,7 +81,7 @@ function App() {
       <div className="button text">
         <button onClick={startButton}>start</button>
         <button onClick={pauseButton}>pause</button>
-        <button onClick={resetButton}>reset</button>
+        <button onClick={handleResetButton}>reset</button>
       </div>
     </div>
   );
