@@ -42,7 +42,11 @@ function useTimer(startTime: number) {
     countRef.current = null;
   }
 
-  function resetButton() {}
+  function resetButton() {
+    clearInterval(countRef.current);
+    countRef.current = null;
+    setLeftTime(startTime);
+  }
 
   return { leftTime, startButton, setLeftTime, pauseButton, resetButton };
 }
