@@ -61,6 +61,15 @@ function App() {
   const { leftTime, startButton, pauseButton, resetButton } =
     useTimer(Number(input)) || 0;
 
+  const progress =
+    input && Number(input) > 0 ? (leftTime / Number(input)) * 100 : 0;
+
+  let color = "green";
+
+  if (progress < 50) color = "orange";
+  if (progress < 20) color = "red";
+  const hue = (progress * 120) / 100;
+
   function handleResetButton() {
     resetButton();
     setInput("");
@@ -77,6 +86,15 @@ function App() {
       ></input>
       <p>time left:</p>
       <p>{leftTime.toFixed(3)}s</p>
+      <div className="progress-div">
+        <div
+          className="progress-bar"
+          style={{
+            width: `${progress}%`,
+            backgroundColor: `hsl(${hue}, 100%, 50%)`,
+          }}
+        ></div>
+      </div>
 
       <div className="button text">
         <button onClick={startButton}>start</button>
