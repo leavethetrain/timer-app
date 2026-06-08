@@ -35,12 +35,21 @@ function useTimer(startTime: number) {
     }, 10);
   }
 
-  return { leftTime, startButton, setLeftTime };
+  function pauseButton() {
+    if (countRef === null) return;
+
+    clearInterval(countRef.current);
+    countRef.current = null;
+  }
+
+  function resetButton() {}
+
+  return { leftTime, startButton, setLeftTime, pauseButton, resetButton };
 }
 
 function App() {
   const { input, inputChange } = useInput();
-  const { leftTime, startButton, setLeftTime } = useTimer(input);
+  const { leftTime, startButton, pauseButton, resetButton } = useTimer(input);
   return (
     <div className="timer text">
       <h1 className="title text">Timer</h1>
@@ -56,8 +65,8 @@ function App() {
 
       <div className="button text">
         <button onClick={startButton}>start</button>
-        <button>pause</button>
-        <button>reset</button>
+        <button onClick={pauseButton}>pause</button>
+        <button onClick={resetButton}>reset</button>
       </div>
     </div>
   );
