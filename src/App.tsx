@@ -64,10 +64,6 @@ function App() {
   const progress =
     input && Number(input) > 0 ? (leftTime / Number(input)) * 100 : 0;
 
-  let color = "green";
-
-  if (progress < 50) color = "orange";
-  if (progress < 20) color = "red";
   const hue = (progress * 120) / 100;
 
   function handleResetButton() {
