@@ -80,8 +80,8 @@ function App() {
         value={input}
         onChange={inputChange}
       ></input>
-      <p>time left:</p>
-      <p>{leftTime.toFixed(3)}s</p>
+      <p className="text">time left:</p>
+      <p className="seconds text">{leftTime.toFixed(3)}s</p>
       <div className="progress-div">
         <div
           className="progress-bar"
