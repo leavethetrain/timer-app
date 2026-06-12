@@ -73,9 +73,9 @@ function App() {
   return (
     <div className="timer text">
       <h1 className="title text">Timer</h1>
-      <p className="text">Zeit festlegen</p>
+      <p className="text">set time</p>
       <input
-        className="input "
+        className="input"
         type="number"
         value={input}
         onChange={inputChange}
