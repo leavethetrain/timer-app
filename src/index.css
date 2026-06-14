@@ -24,3 +24,10 @@ body {
       transparent 35%
     );
 }
+
+@media only screen and (max-width: 600px) {
+  #root {
+    height: 100vh;
+    background: rgba(126, 37, 148, 0.192);
+  }
+}
